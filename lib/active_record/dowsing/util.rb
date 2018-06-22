@@ -18,8 +18,7 @@ module ActiveRecord
           cleaner.add_filter   { |line| line.remove(Rails.root.to_s) }
           cleaner.add_filter   { |line| line.remove('*') } # Sanitize comment
 
-          cleaner.add_silencer { |line| line =~ %r{activerecord-dowsing/lib} }
-          cleaner.add_silencer { |line| line =~ /gems/ }
+          cleaner.add_silencer { |line| !line.start_with?('/app/') }
         end
 
         @cleaner.clean(stack)
